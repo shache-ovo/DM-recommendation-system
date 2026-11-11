@@ -1,17 +1,30 @@
 {
-  "source": "https://www.kaggle.com/datasets/shuyangli94/food-com-recipes-and-user-interactions",
+  "dataset": "Food.com Recipes and Interactions",
   "provider_page": "https://cseweb.ucsd.edu/~jmcauley/datasets.html#foodcom",
+  "source": "https://www.kaggle.com/datasets/shuyangli94/food-com-recipes-and-user-interactions",
+  "citation": "B. P. Majumder, S. Li, J. Ni, and J. McAuley, \"Generating personalized recipes from historical user preferences,\" in Proc. EMNLP, 2019.",
+  "license": "Data files © Original Authors (Kaggle 페이지 표기)",
   "access_date": "2026-11-09",
+  "verified_date": "2026-11-11",
   "files": [
     {
       "name": "RAW_recipes.csv",
       "bytes": 294520189,
-      "sha256": "6a8136d1da9e03396a9f52d72200b3fddb8fe103f11e1496effca30ac4e0539f"
+      "sha256": "6a8136d1da9e03396a9f52d72200b3fddb8fe103f11e1496effca30ac4e0539f",
+      "rows": 231637,
+      "columns": ["name", "id", "minutes", "contributor_id", "submitted", "tags", "nutrition", "n_steps", "steps", "description", "ingredients", "n_ingredients"]
     },
     {
       "name": "RAW_interactions.csv",
       "bytes": 349436524,
-      "sha256": "4e278d2f687b1020f5694e51003a7d6174344b51aebbdf4530de88b5c6a78ee4"
+      "sha256": "4e278d2f687b1020f5694e51003a7d6174344b51aebbdf4530de88b5c6a78ee4",
+      "rows": 1132367,
+      "columns": ["user_id", "recipe_id", "date", "rating", "review"]
     }
-  ]
+  ],
+  "expected_counts": {
+    "recipes": 231637,
+    "users": 226570,
+    "interactions": 1132367
+  }
 }

@@ -32,12 +32,12 @@ Food.com 레시피와 사용자 상호작용 데이터로, 사용자의 취향�
 ```
 configs/default.yaml     실험 설정 (seed, 경로, 전처리·분할·MinHash·LSH 값)
 src/dmrec/               팀이 작성한 코드 (전처리, MinHash, LSH)
-scripts/                 단계별 실행 스크립트
+scripts/                 실행 스크립트 (데이터 다운로드·검증 등)
 tests/                   단위 테스트
 data/foodcom/            원본 데이터 (커밋하지 않음, 체크섬만 커밋)
 data/processed/          가공 산출물 (커밋하지 않음)
 reports/figures/         보고서용 그림
-docs/                    산출물 스키마와 전처리 결정 문서
+docs/                    데이터 출처, 산출물 스키마, 전처리 결정 문서
 requirements.txt         실행 환경
 requirements-dev.txt     검증용 비교 라이브러리
 ```
@@ -61,11 +61,19 @@ MinHash/LSH 구현을 라이브러리와 비교 검증할 때만 `pip install -r
 - 데이터: Food.com Recipes and Interactions [1]
 - 제공 페이지: https://cseweb.ucsd.edu/~jmcauley/datasets.html#foodcom
 - 다운로드 페이지: https://www.kaggle.com/datasets/shuyangli94/food-com-recipes-and-user-interactions
-- 규모(제공 페이지 기재): 레시피 231,637개, 사용자 226,570명, 리뷰 1,132,367건
+- 접근일: 2026-11-09
+- 규모: 레시피 231,637개, 사용자 226,570명, 상호작용 1,132,367건
 - 사용 파일: `RAW_recipes.csv`, `RAW_interactions.csv`
 
-원본 파일은 저장소에 포함하지 않는다. 내려받은 두 파일을 `data/foodcom/`에 둔다.
-획득 절차, 접근일, 체크섬 검증 방법: 작성 예정
+원본 파일은 저장소에 포함하지 않는다. 아래 명령으로 내려받고 체크섬을 확인한다.
+
+```bash
+bash scripts/download_data.sh             # data/foodcom/ 에 내려받고 검증
+python3 scripts/verify_data.py --counts   # 이미 받은 파일을 다시 검증
+```
+
+다운로드가 실패하면 Kaggle 페이지에서 직접 내려받아 두 CSV를 `data/foodcom/`에 둔다.
+출처, license, 컬럼, 체크섬은 [docs/data_source.md](docs/data_source.md)에 정리했다.
 
 ## Preprocessing
 

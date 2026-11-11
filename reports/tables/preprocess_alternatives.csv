@@ -1,0 +1,7 @@
+positives,k,interactions,users,recipes,llo_train_per_user_min,llo_train_per_user_median,llo_test_users,llo_test_warm_pct,global_train_end,global_test_start,global_test_warm_pct,global_test_warm_users,core_calories_median,core_calories_p99,core_calories_max
+all_interactions,3,733292,32606,80429,1,4.0,32492,99.65,2010-09-27,2012-07-20,57.37,6107,301.8,3156.0,8072.6
+all_interactions,5,555206,17807,41209,3,8.0,17803,99.98,2010-07-20,2012-05-08,66.02,4797,297.1,3075.0,8024.1
+all_interactions,10,311060,7444,12895,8,18.0,7434,99.87,2010-06-08,2012-03-01,76.51,2811,294.4,2735.6,8024.1
+rating>=4,3,660297,28997,73925,1,4.0,28899,99.66,2010-08-08,2012-06-06,59.0,5549,301.2,3140.6,8072.6
+rating>=4,5,498200,16032,37819,3,8.0,16028,99.98,2010-06-24,2012-04-02,67.45,4336,295.7,3014.1,8024.1
+rating>=4,10,273659,6704,11592,8,17.0,6704,100.0,2010-05-20,2012-02-03,77.24,2518,293.1,2715.6,8024.1

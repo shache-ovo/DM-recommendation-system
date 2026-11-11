@@ -95,7 +95,10 @@ python3 scripts/preprocess.py   # 약 30초. data/processed/ 에 산출물, repo
 결과는 train 466,136건, validation 16,029건, test 16,028건이다.
 평가 집합에는 train에 등장한 레시피만 남긴다.
 
-설정값은 `configs/default.yaml`의 `preprocess`, `split`에 있다. 산출물 스키마와 결정 근거: 작성 예정
+설정값은 `configs/default.yaml`의 `preprocess`, `split`에 있다.
+
+- 산출물의 컬럼과 사용 예: [docs/data_schema.md](docs/data_schema.md)
+- 각 규칙을 정한 근거와 한계: [docs/preprocessing.md](docs/preprocessing.md)
 
 ## Algorithms
 
@@ -127,6 +130,7 @@ python3 -m pytest          # 단위 테스트
 
 ```bash
 python3 scripts/eda.py     # 원본 데이터 EDA: reports/tables/, reports/figures/ (약 1분)
+python3 scripts/preprocess_alternatives.py   # k 와 분할 방식 비교 표: reports/tables/preprocess_alternatives.csv (약 30초)
 ```
 
 EDA 결과 해설은 [docs/eda.md](docs/eda.md)에 있다. 나머지 표와 그림: 작성 예정

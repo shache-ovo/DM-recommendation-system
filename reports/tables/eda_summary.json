@@ -1,0 +1,123 @@
+{
+  "missing_recipes": {
+    "name": 1,
+    "description": 4979
+  },
+  "missing_interactions": {
+    "review": 169
+  },
+  "n_interactions": 1132367,
+  "n_positive": 1003724,
+  "positive_min_rating": 4,
+  "duplicate_user_recipe_pairs": 0,
+  "date_min": "2000-01-25",
+  "date_max": "2018-12-20",
+  "per_user": {
+    "min": 1.0,
+    "mean": 4.997868208500684,
+    "max": 7671.0,
+    "p1": 1.0,
+    "p5": 1.0,
+    "p25": 1.0,
+    "p50": 1.0,
+    "p75": 2.0,
+    "p95": 11.0,
+    "p99": 61.0,
+    "p99.9": 518.4310000000114,
+    "n": 226570,
+    "share_with_1": 0.7337952950523017,
+    "share_lt_5": 0.8981065454384959
+  },
+  "per_recipe": {
+    "min": 1.0,
+    "mean": 4.888541122532238,
+    "max": 1613.0,
+    "p1": 1.0,
+    "p5": 1.0,
+    "p25": 1.0,
+    "p50": 2.0,
+    "p75": 4.0,
+    "p95": 15.0,
+    "p99": 47.0,
+    "p99.9": 199.0,
+    "n": 231637,
+    "share_with_1": 0.39697025950085696,
+    "share_lt_5": 0.7686336811476577
+  },
+  "top_1pct_users_share_of_interactions": 0.5122208612578784,
+  "core5_users_with_tie_on_last_date_share": 0.10378358162438446,
+  "nutrition_all_zero_recipes": 0,
+  "minutes": {
+    "min": 0.0,
+    "mean": 9398.546009488984,
+    "max": 2147483647.0,
+    "p1": 2.0,
+    "p5": 5.0,
+    "p25": 20.0,
+    "p50": 40.0,
+    "p75": 65.0,
+    "p95": 255.0,
+    "p99": 903.9199999999546,
+    "p99.9": 10095.0,
+    "zero": 1094,
+    "over_1_day": 2000
+  },
+  "n_steps": {
+    "min": 0.0,
+    "mean": 9.7654994668382,
+    "max": 145.0,
+    "p1": 1.0,
+    "p5": 3.0,
+    "p25": 6.0,
+    "p50": 9.0,
+    "p75": 12.0,
+    "p95": 21.0,
+    "p99": 30.0,
+    "p99.9": 48.0,
+    "zero": 1
+  },
+  "ingredients": {
+    "set_size": {
+      "min": 1.0,
+      "mean": 9.051153313158087,
+      "max": 43.0,
+      "p1": 3.0,
+      "p5": 4.0,
+      "p25": 6.0,
+      "p50": 9.0,
+      "p75": 11.0,
+      "p95": 16.0,
+      "p99": 20.0,
+      "p99.9": 26.0
+    },
+    "n_ingredients_column_mismatch": 0,
+    "recipes_with_repeated_ingredient": 0,
+    "recipes_with_lt_3_ingredients": 2152,
+    "recipes_with_1_ingredient": 25,
+    "vocabulary": 14942,
+    "in_1_recipe": 3546,
+    "in_lt_5_recipes": 6932,
+    "in_ge_1pct_recipes": 146,
+    "in_ge_10pct_recipes": 10,
+    "plural_pairs": 1077,
+    "recipes_sharing_identical_set": 3988,
+    "identical_set_groups": 1723
+  },
+  "tags": {
+    "vocabulary": 552,
+    "per_recipe": {
+      "min": 1.0,
+      "mean": 17.88007960731662,
+      "max": 73.0,
+      "p1": 5.0,
+      "p5": 8.0,
+      "p25": 13.0,
+      "p50": 17.0,
+      "p75": 22.0,
+      "p95": 31.0,
+      "p99": 38.0,
+      "p99.9": 46.0
+    },
+    "recipes_without_tags": 0
+  }
+}

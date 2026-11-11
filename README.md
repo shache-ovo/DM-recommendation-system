@@ -36,6 +36,7 @@ scripts/                 실행 스크립트 (데이터 다운로드·검증 등
 tests/                   단위 테스트
 data/foodcom/            원본 데이터 (커밋하지 않음, 체크섬만 커밋)
 data/processed/          가공 산출물 (커밋하지 않음)
+reports/tables/          집계 표 (CSV, JSON)
 reports/figures/         보고서용 그림
 docs/                    데이터 출처, 산출물 스키마, 전처리 결정 문서
 requirements.txt         실행 환경
@@ -107,7 +108,11 @@ python3 -m pytest          # 단위 테스트
 
 ## Reproducing tables/figures
 
-작성 예정
+```bash
+python3 scripts/eda.py     # 원본 데이터 EDA: reports/tables/, reports/figures/ (약 1분)
+```
+
+EDA 결과 해설은 [docs/eda.md](docs/eda.md)에 있다. 나머지 표와 그림: 작성 예정
 
 ## References and external code
 

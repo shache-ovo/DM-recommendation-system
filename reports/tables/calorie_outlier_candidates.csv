@@ -1,0 +1,10 @@
+rule,recipes,percent
+calories > 1000,16778,7.243
+calories > 2000,6072,2.621
+calories > 3000,3151,1.36
+calories > 5000,1049,0.453
+calories > 10000,125,0.054
+calories > p99 (3517.0),2317,1.0
+calories > p99.5 (4803.1),1159,0.5
+calories > p99.9 (8291.0),232,0.1
+calories == 0,53,0.023

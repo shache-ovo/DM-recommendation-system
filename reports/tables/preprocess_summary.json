@@ -1,0 +1,63 @@
+{
+  "config": {
+    "preprocess": {
+      "positive_min_rating": 4,
+      "keep_non_positive_rows": true,
+      "k_core": 5,
+      "calorie_max_quantile": 0.999,
+      "remove_zero_calories": true,
+      "nutrition_fields": [
+        "calories",
+        "total_fat",
+        "sugar",
+        "sodium",
+        "protein",
+        "saturated_fat",
+        "carbohydrates"
+      ]
+    },
+    "split": {
+      "method": "per_user_leave_last_out",
+      "n_test": 1,
+      "n_valid": 1,
+      "restrict_eval_to_train": true
+    }
+  },
+  "calorie": {
+    "calorie_cutoff": 8291.049600000015,
+    "removed_over_cutoff": 232,
+    "removed_zero": 53
+  },
+  "rows": {
+    "recipes": 231352,
+    "users": 16032,
+    "train": 466136,
+    "valid": 16029,
+    "test": 16028,
+    "seen_non_positive": 30448
+  },
+  "core_users": 16032,
+  "core_recipes": 37818,
+  "train_density_pct": 0.0769,
+  "train_per_user": {
+    "min": 3,
+    "median": 8.0,
+    "max": 2724
+  },
+  "users_with_valid": 16029,
+  "users_with_test": 16028,
+  "date_range": {
+    "train": [
+      "2000-09-12",
+      "2018-12-16"
+    ],
+    "valid": [
+      "2001-08-06",
+      "2018-12-16"
+    ],
+    "test": [
+      "2001-10-06",
+      "2018-12-18"
+    ]
+  }
+}

@@ -78,7 +78,24 @@ python3 scripts/verify_data.py --counts   # 이미 받은 파일을 다시 검�
 
 ## Preprocessing
 
-작성 예정. 설정값은 `configs/default.yaml`의 `preprocess`, `split`에 있다.
+```bash
+python3 scripts/preprocess.py   # 약 30초. data/processed/ 에 산출물, reports/tables/ 에 단계별 행 수
+```
+
+적용 순서와 결과(기본 설정)는 다음과 같다.
+
+| 단계 | 상호작용 | 사용자 | 레시피 |
+|---|---|---|---|
+| 원본 | 1,132,367 | 226,570 | 231,637 |
+| 칼로리 0 또는 상위 0.1% 레시피 제거 | 1,131,241 | 226,330 | 231,352 |
+| 평점 4 이상만 양성으로 | 1,002,781 | 180,144 | 217,299 |
+| 5-core (사용자·레시피 모두 양성 5건 이상) | 498,200 | 16,032 | 37,819 |
+
+사용자별로 시간순 정렬해 마지막 양성 1건을 test, 그 앞 1건을 validation, 나머지를 train으로 나눈다.
+결과는 train 466,136건, validation 16,029건, test 16,028건이다.
+평가 집합에는 train에 등장한 레시피만 남긴다.
+
+설정값은 `configs/default.yaml`의 `preprocess`, `split`에 있다. 산출물 스키마와 결정 근거: 작성 예정
 
 ## Algorithms
 

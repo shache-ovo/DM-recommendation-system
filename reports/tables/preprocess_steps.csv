@@ -1,0 +1,9 @@
+step,interactions,users,recipes_with_interactions,recipes_in_catalog,note
+0_raw,1132367,226570,231637,231637,
+1_calorie_filter,1131241,226330,231352,231352,"cutoff=8291.049600000015, over=232, zero=53"
+2_positive_only,1002781,180144,217299,231352,rating>=4
+3_k_core,498200,16032,37819,231352,k=5
+4_train,466136,16032,37818,231352,
+4_valid,16029,16029,9075,231352,dropped_not_in_train=3
+4_test,16028,16028,8894,231352,dropped_not_in_train=4
+5_seen_non_positive,30448,8407,14005,231352,core 사용자 x core 레시피의 비양성 기록

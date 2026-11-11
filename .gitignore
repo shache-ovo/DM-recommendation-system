@@ -1,1 +1,23 @@
+# 데이터: 원본과 가공 산출물은 커밋하지 않는다 (획득 스크립트, 체크섬, 접근일만 커밋)
 data/foodcom/*.csv
+data/processed/
+
+# 수업 자료와 팀 계획서
+프로젝트 계획/
+프로젝트 참고 자료/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+
+# 가상환경
+.venv/
+venv/
+
+# 노트북, 편집기, OS
+.ipynb_checkpoints/
+.vscode/
+.idea/
+.DS_Store

@@ -1,0 +1,198 @@
+{
+  "source": "https://www.kaggle.com/datasets/shuyangli94/food-com-recipes-and-user-interactions",
+  "files": [
+    "RAW_recipes.csv",
+    "RAW_interactions.csv"
+  ],
+  "recipe_count": 231637,
+  "user_count": 226570,
+  "interaction_count": 1132367,
+  "rated_recipe_count": 231637,
+  "rating_distribution": [
+    {
+      "rating": 0,
+      "count": 60847,
+      "percent": 5.37
+    },
+    {
+      "rating": 1,
+      "count": 12818,
+      "percent": 1.13
+    },
+    {
+      "rating": 2,
+      "count": 14123,
+      "percent": 1.25
+    },
+    {
+      "rating": 3,
+      "count": 40855,
+      "percent": 3.61
+    },
+    {
+      "rating": 4,
+      "count": 187360,
+      "percent": 16.55
+    },
+    {
+      "rating": 5,
+      "count": 816364,
+      "percent": 72.09
+    }
+  ],
+  "top_ingredients": [
+    {
+      "name": "salt",
+      "count": 85746,
+      "percent": 37.02
+    },
+    {
+      "name": "butter",
+      "count": 54975,
+      "percent": 23.73
+    },
+    {
+      "name": "sugar",
+      "count": 44535,
+      "percent": 19.23
+    },
+    {
+      "name": "onion",
+      "count": 39065,
+      "percent": 16.86
+    },
+    {
+      "name": "water",
+      "count": 34914,
+      "percent": 15.07
+    },
+    {
+      "name": "eggs",
+      "count": 33761,
+      "percent": 14.57
+    },
+    {
+      "name": "olive oil",
+      "count": 32822,
+      "percent": 14.17
+    },
+    {
+      "name": "flour",
+      "count": 26266,
+      "percent": 11.34
+    },
+    {
+      "name": "milk",
+      "count": 25786,
+      "percent": 11.13
+    },
+    {
+      "name": "garlic cloves",
+      "count": 25748,
+      "percent": 11.12
+    }
+  ],
+  "example_recipes": [
+    {
+      "id": 282977,
+      "name": "warm berry topping for ice cream",
+      "minutes": 60,
+      "n_ingredients": 9,
+      "ingredients": [
+        "brown sugar",
+        "butter",
+        "quick oatmeal",
+        "strawberries",
+        "key lime juice",
+        "honey",
+        "raspberry preserves",
+        "pecan halves",
+        "sugar"
+      ],
+      "review_count": 1,
+      "mean_raw_rating": 4.0
+    },
+    {
+      "id": 18403,
+      "name": "teriyaki salmon cakes",
+      "minutes": 25,
+      "n_ingredients": 8,
+      "ingredients": [
+        "red sockeye",
+        "dry breadcrumbs",
+        "green onions",
+        "garlic",
+        "orange juice",
+        "teriyaki sauce",
+        "eggs",
+        "vegetable oil"
+      ],
+      "review_count": 4,
+      "mean_raw_rating": 4.5
+    },
+    {
+      "id": 79425,
+      "name": "100 000 calorie bars",
+      "minutes": 40,
+      "n_ingredients": 6,
+      "ingredients": [
+        "chocolate cake mix",
+        "butter",
+        "evaporated milk",
+        "chocolate chips",
+        "nuts",
+        "caramels"
+      ],
+      "review_count": 3,
+      "mean_raw_rating": 3.33
+    },
+    {
+      "id": 222292,
+      "name": "betty s italian dinner for 2",
+      "minutes": 20,
+      "n_ingredients": 6,
+      "ingredients": [
+        "cooked spaghetti",
+        "bacon",
+        "onion",
+        "tomato sauce",
+        "butter",
+        "salt"
+      ],
+      "review_count": 3,
+      "mean_raw_rating": 5.0
+    }
+  ],
+  "quality": {
+    "rating_missing": 0,
+    "recipe_id_duplicates": 0,
+    "unmatched_recipe_ids": 0,
+    "interaction_date_min": "2000-01-25",
+    "interaction_date_max": "2018-12-20"
+  },
+  "recipe_columns": [
+    "name",
+    "id",
+    "minutes",
+    "contributor_id",
+    "submitted",
+    "tags",
+    "nutrition",
+    "n_steps",
+    "steps",
+    "description",
+    "ingredients",
+    "n_ingredients"
+  ],
+  "interaction_columns": [
+    "user_id",
+    "recipe_id",
+    "date",
+    "rating"
+  ],
+  "method": {
+    "ingredients": "레시피별 같은 재료는 한 번만 집계, 원본 재료 문자열 사용",
+    "examples": "조리 시간 10~60분·재료 수 5~10개 조건에서 무작위 4개, random_state=42",
+    "ratings": "원본 0~5 값을 모두 포함, 재분류하지 않음"
+  }
+}

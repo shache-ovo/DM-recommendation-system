@@ -40,9 +40,15 @@ def test_band_keys_equal_exactly_when_band_values_equal():
     assert len(set(band_keys(constant, 4, 3)[0].tolist())) == 4
 
 
-def test_signature_length_must_match():
+def test_signature_must_be_long_enough_and_extra_columns_only_affect_ranking():
     with pytest.raises(ValueError):
         band_keys(np.zeros((2, 10), dtype=np.uint32), 4, 3)
+    sig = random_signatures(200, 16, 9)
+    longer = LSHIndex(4, 3).build(sig)                      # 앞 12 개만 banding 에 쓴다
+    exact = LSHIndex(4, 3).build(sig[:, :12])
+    assert all(np.array_equal(longer.candidates(r), exact.candidates(r)) for r in range(200))
+    rows, estimates = longer.query(0)
+    assert np.allclose(estimates, estimate_jaccard(sig[rows], sig[0][None, :]))   # 순위는 16 개 전체로
     with pytest.raises(ValueError):
         LSHIndex(0, 3)
 

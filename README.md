@@ -113,7 +113,7 @@ python3 scripts/preprocess.py   # 약 30초. data/processed/ 에 산출물, repo
 MinHash와 LSH는 직접 구현한다.
 
 - MinHash: 재료 이름을 정규화해 집합을 만들고 길이 128의 시그니처로 Jaccard를 추정한다. 구현, 정규화 규칙, 추정 오차는 [docs/minhash.md](docs/minhash.md)에 있다.
-- LSH: 시그니처를 band로 나눠 버킷에 넣고, 같은 버킷에 든 레시피만 후보로 비교한다. 구현과 조회 방법은 [docs/lsh.md](docs/lsh.md)에 있다.
+- LSH: 시그니처를 band로 나눠 버킷에 넣고, 같은 버킷에 든 레시피만 후보로 삼아 정확한 Jaccard로 순위를 매긴다(b = 42, r = 3). 구현과 조회 방법은 [docs/lsh.md](docs/lsh.md), 정확한 Jaccard와 비교한 평가는 [docs/lsh_eval.md](docs/lsh_eval.md)에 있다.
 
 ## Experiment commands/configurations
 
@@ -140,6 +140,8 @@ python3 scripts/eda.py     # 원본 데이터 EDA: reports/tables/, reports/figu
 python3 scripts/preprocess_alternatives.py   # k 와 분할 방식 비교 표: reports/tables/preprocess_alternatives.csv (약 30초)
 python3 scripts/minhash_eval.py              # MinHash 추정 오차 표와 그림 (약 30초)
 python3 scripts/ingredient_variants.py       # 재료 집합 만드는 방법 비교 표 (약 4분)
+python3 scripts/lsh_eval.py                  # LSH 설정별 재현율·속도 표, S-curve 그림 (약 1분 30초)
+python3 scripts/lsh_user_hit.py              # 유사 레시피를 추천 후보로 썼을 때의 정답 포함률 (약 1분 30초)
 ```
 
 EDA 결과 해설은 [docs/eda.md](docs/eda.md)에 있다. 나머지 표와 그림: 작성 예정

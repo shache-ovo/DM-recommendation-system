@@ -24,14 +24,16 @@ def validate_config(config: dict[str, Any]) -> None:
     """값 사이의 제약을 확인한다. 어긋나면 ValueError."""
     num_perm = config["minhash"]["num_perm"]
     bands, rows = config["lsh"]["bands"], config["lsh"]["rows"]
-    if bands * rows != num_perm:
+    if bands * rows > num_perm:
         raise ValueError(
-            f"lsh.bands * lsh.rows ({bands} * {rows}) 가 minhash.num_perm ({num_perm}) 과 다르다"
+            f"lsh.bands * lsh.rows ({bands} * {rows}) 가 minhash.num_perm ({num_perm}) 보다 크다"
         )
     if not 0 <= config["preprocess"]["positive_min_rating"] <= 5:
         raise ValueError("preprocess.positive_min_rating 은 0~5 여야 한다")
     if config["lsh"]["index_scope"] not in ("core", "all"):
         raise ValueError("lsh.index_scope 는 core 또는 all 이어야 한다")
+    if config["lsh"]["rank_by"] not in ("exact", "estimate"):
+        raise ValueError("lsh.rank_by 는 exact 또는 estimate 여야 한다")
     if config["preprocess"]["k_core"] < 1:
         raise ValueError("preprocess.k_core 는 1 이상이어야 한다")
 

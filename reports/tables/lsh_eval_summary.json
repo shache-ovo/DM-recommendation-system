@@ -1,0 +1,32 @@
+{
+  "recipes_indexed": 37818,
+  "queries": 2000,
+  "top_k": 10,
+  "pairs_with_jaccard_at_least": {
+    "0.3": 628911,
+    "0.4": 167500,
+    "0.5": 47208,
+    "0.6": 8563,
+    "0.7": 1820,
+    "0.8": 392
+  },
+  "exact_top_k_mean_jaccard": 0.3991,
+  "exact_brute_force_ms_per_query": 3.213,
+  "minhash_scan_ms_per_query": 5.269,
+  "timing_queries": 500,
+  "seed_check": {
+    "bands": 42,
+    "rows": 3,
+    "jaccard_range": [
+      0.2,
+      0.4
+    ],
+    "seeds": 12,
+    "theory": 0.47628,
+    "observed_mean": 0.47041,
+    "observed_sd_across_seeds": 0.07512,
+    "observed_se_of_mean": 0.02168,
+    "observed_min": 0.33937,
+    "observed_max": 0.57622
+  }
+}

@@ -1,0 +1,6 @@
+bands,rows,neighbors_per_liked_recipe,lsh_hit_rate,lsh_candidates_median,exact_hit_rate,exact_candidates_median,popularity_hit_rate_same_size
+42,3,5,0.0119,40.0,0.0126,40.0,0.0841
+42,3,10,0.0192,80.0,0.0204,80.0,0.119
+42,3,20,0.0313,160.0,0.0333,160.0,0.1696
+42,3,50,0.0602,393.0,0.0633,399.0,0.2512
+42,3,100,0.0924,742.0,0.1008,793.0,0.3224

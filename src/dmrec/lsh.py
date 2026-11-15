@@ -1,6 +1,6 @@
 """MinHash 시그니처에 대한 LSH (banding). 직접 구현했다.
 
-길이 b*r 의 시그니처를 r 개씩 b 개의 band 로 나눈다. 어떤 band 에서든 r 개 값이 모두 같은 두 항목을 후보 쌍으로 본다.
+시그니처의 앞 b*r 개 값을 r 개씩 b 개의 band 로 나눈다. 어떤 band 에서든 r 개 값이 모두 같은 두 항목을 후보 쌍으로 본다.
 Jaccard 가 s 인 두 항목이 후보가 될 확률은 1 - (1 - s^r)^b 다 [Leskovec, Rajaraman, Ullman, Mining of Massive Datasets, 3.4절].
 """
 
@@ -31,9 +31,10 @@ def band_keys(signatures: np.ndarray, bands: int, rows: int) -> np.ndarray:
     값이 다른데 키가 같을 확률은 쌍마다 2^-64 수준이고, 그런 경우에도 후보가 하나 늘 뿐이다.
     """
     signatures = np.atleast_2d(signatures)
-    if signatures.shape[1] != bands * rows:
-        raise ValueError(f"시그니처 길이 {signatures.shape[1]} 가 bands * rows ({bands} * {rows}) 와 다르다")
-    grouped = signatures.reshape(signatures.shape[0], bands, rows).astype(np.uint64)
+    if signatures.shape[1] < bands * rows:
+        raise ValueError(f"시그니처 길이 {signatures.shape[1]} 가 bands * rows ({bands} * {rows}) 보다 짧다")
+    # 시그니처가 더 길면 앞의 bands * rows 개만 banding 에 쓴다. 순위는 시그니처 전체로 매긴다.
+    grouped = signatures[:, :bands * rows].reshape(signatures.shape[0], bands, rows).astype(np.uint64)
     keys = np.broadcast_to(np.arange(1, bands + 1, dtype=np.uint64), (signatures.shape[0], bands)).copy()
     for j in range(rows):
         keys = keys * _MULTIPLIER + grouped[:, :, j]     # uint64 에서 넘치면 2^64 로 나눈 나머지가 된다

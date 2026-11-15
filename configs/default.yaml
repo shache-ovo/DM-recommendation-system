@@ -66,11 +66,13 @@ minhash:
   num_perm: 128             # 시그니처 길이. 6단계 실험으로 정한다
 
 lsh:
-  # 시그니처를 rows 개씩 bands 개로 나눈다. bands * rows == minhash.num_perm
-  # 후보가 될 확률이 가파르게 오르는 유사도는 대략 (1/bands)^(1/rows) = 0.42 다.
-  bands: 32                 # 8단계 실험으로 확정한다
-  rows: 4                   # 8단계 실험으로 확정한다
+  # 시그니처의 앞 bands * rows 개 값을 rows 개씩 bands 개로 나눈다. bands * rows <= minhash.num_perm
+  # 후보가 될 확률이 가파르게 오르는 유사도는 대략 (1/bands)^(1/rows) = 0.29 다.
+  bands: 42                 # 근거: docs/lsh_eval.md
+  rows: 3                   # 근거: docs/lsh_eval.md
   index_scope: core         # core: 추천 대상 레시피만 인덱스에 넣는다. all: 전체 레시피
-  # lsh_neighbors.csv 에 레시피마다 저장할 이웃 수와 최소 추정 Jaccard
+  # 후보의 순위를 매기는 값. exact: 재료 집합으로 계산한 정확한 Jaccard. estimate: MinHash 추정값
+  rank_by: exact
+  # lsh_neighbors.csv 에 레시피마다 저장할 이웃 수와 최소 Jaccard
   neighbors_top_n: 20
   neighbors_min_jaccard: 0.0

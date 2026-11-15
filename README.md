@@ -110,17 +110,23 @@ python3 scripts/preprocess.py   # 약 30초. data/processed/ 에 산출물, repo
 | k-means | 레시피의 영양 유형 군집화 | 영양 벡터 |
 | Regularized latent-factor matrix factorization (user/item bias 포함) | 사용자별 취향 점수 | 사용자-레시피 상호작용 |
 
-MinHash와 LSH는 직접 구현한다. 구현 설명: 작성 예정
+MinHash와 LSH는 직접 구현한다.
+
+- MinHash: 재료 이름을 정규화해 집합을 만들고 길이 128의 시그니처로 Jaccard를 추정한다. 구현, 정규화 규칙, 추정 오차는 [docs/minhash.md](docs/minhash.md)에 있다.
+- LSH: 작성 예정
 
 ## Experiment commands/configurations
 
 모든 설정은 `configs/default.yaml`에 있고 random seed는 `seed` 값으로 고정한다.
 
 ```bash
-python3 -m pytest          # 단위 테스트
+python3 -m pytest                  # 단위 테스트
+bash scripts/download_data.sh      # 1. 원본 데이터 받기
+python3 scripts/preprocess.py      # 2. 전처리: data/processed/
+python3 scripts/build_minhash.py   # 3. 재료 집합과 MinHash 시그니처: data/processed/
 ```
 
-단계별 실행 명령: 작성 예정
+LSH 이후 단계의 실행 명령: 작성 예정
 
 ## Evaluation
 
@@ -131,6 +137,8 @@ python3 -m pytest          # 단위 테스트
 ```bash
 python3 scripts/eda.py     # 원본 데이터 EDA: reports/tables/, reports/figures/ (약 1분)
 python3 scripts/preprocess_alternatives.py   # k 와 분할 방식 비교 표: reports/tables/preprocess_alternatives.csv (약 30초)
+python3 scripts/minhash_eval.py              # MinHash 추정 오차 표와 그림 (약 30초)
+python3 scripts/ingredient_variants.py       # 재료 집합 만드는 방법 비교 표 (약 4분)
 ```
 
 EDA 결과 해설은 [docs/eda.md](docs/eda.md)에 있다. 나머지 표와 그림: 작성 예정

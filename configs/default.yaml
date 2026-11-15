@@ -32,12 +32,40 @@ split:
   # cold user/item 을 다루지 않으므로 평가 집합에는 train 에 등장한 사용자·레시피만 남긴다.
   restrict_eval_to_train: true
 
-# 아래 두 블록은 자리만 잡아 둔 값이다. 6~8단계에서 실험으로 확정한다.
-minhash:
-  num_perm: 128
-  stop_ingredients: []      # salt 같은 고빈도 재료 처리. 6단계에서 결정
-  max_doc_freq: null
+# 재료 집합 정규화 (MinHash 입력). 근거는 docs/minhash.md
+ingredients:
+  # 이름 끝의 s / es / ies 를 떼거나 바꾼 형태가 어휘에 있을 때만 그 형태로 바꾼다 (eggs -> egg)
+  fold_plurals: true
+  # 같은 재료를 가리키는 이름을 대표 이름으로 바꾼다. 값이 리스트면 여러 재료로 나눈다.
+  # 빈도 상위 130개 이름 중 뜻이 분명히 같은 것만 넣었다. 복수형을 접은 뒤에 적용한다.
+  aliases:
+    garlic clove: garlic
+    all-purpose flour: flour
+    extra virgin olive oil: olive oil
+    black pepper: pepper
+    ground black pepper: pepper
+    fresh ground black pepper: pepper
+    fresh ground pepper: pepper
+    kosher salt: salt
+    sea salt: salt
+    granulated sugar: sugar
+    white sugar: sugar
+    unsalted butter: butter
+    vanilla extract: vanilla
+    ground cinnamon: cinnamon
+    ground cumin: cumin
+    ground nutmeg: nutmeg
+    confectioners' sugar: powdered sugar
+    fresh lemon juice: lemon juice
+    salt and pepper: [salt, pepper]
+    salt & freshly ground black pepper: [salt, pepper]
+  # 정규화 뒤 전체 레시피 중 이 비율 이상에 나오는 재료를 집합에서 뺀다. null 이면 빼지 않는다.
+  max_doc_freq: null        # 6단계 실험으로 정한다
 
+minhash:
+  num_perm: 128             # 시그니처 길이. 6단계 실험으로 정한다
+
+# 아래 블록은 자리만 잡아 둔 값이다. 7~8단계에서 실험으로 확정한다.
 lsh:
   bands: 32
   rows: 4                   # bands * rows == minhash.num_perm

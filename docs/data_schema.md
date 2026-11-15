@@ -134,6 +134,45 @@ popular = core.sort_values("n_train", ascending=False)["recipe_id"].tolist()
 - 순위를 매길 때 사용자가 이미 본 레시피(위 `excluded`)는 후보에서 뺀다. test를 평가할 때는 그 사용자의 valid 레시피도 뺀다.
 - 사용자별 분할이라서, 어떤 사용자의 test 시점보다 나중에 일어난 다른 사용자의 기록이 train에 들어 있다. 보고서의 한계에 적는다.
 
-## MinHash + LSH 산출물 (예정)
+## 재료 집합과 MinHash 시그니처
 
-재료 유사 레시피 검색 결과는 아직 없다. 구현이 끝나면 이 절에 파일 형식과 조회 함수를 추가한다.
+`python3 scripts/build_minhash.py`가 `data/processed/`에 만든다(약 10초). `preprocess.py`를 먼저 실행해야 한다.
+규칙과 근거는 `docs/minhash.md`에 있다.
+
+### ingredient_sets.csv
+
+행 순서와 행 수는 `recipes.csv`와 같다(231,352행).
+
+| 컬럼 | 형식 | 설명 |
+|---|---|---|
+| `recipe_id` | int | 레시피 id |
+| `recipe_idx` | int | 추천 대상이면 0 이상, 아니면 -1 |
+| `n_ingredients_norm` | int | 정규화한 재료 수 |
+| `ingredients_norm` | str | 정규화한 재료 이름의 JSON 리스트 (사전순, 중복 없음) |
+
+재료 Jaccard로 추천 목록의 다양성을 잴 때는 이 파일의 집합을 쓴다.
+
+```python
+sets = pd.read_csv(P + "ingredient_sets.csv")
+ingredient_set = dict(zip(sets["recipe_id"], sets["ingredients_norm"].map(lambda s: set(json.loads(s)))))
+
+def jaccard(a, b):
+    return len(a & b) / len(a | b) if (a or b) else 0.0
+
+jaccard(ingredient_set[27208], ingredient_set[89204])   # 두 레시피의 재료 유사도
+```
+
+### minhash_signatures.npz
+
+| 배열 | 형태 | 설명 |
+|---|---|---|
+| `recipe_id` | (231352,) | 레시피 id. 행 순서는 `recipes.csv`와 같다 |
+| `recipe_idx` | (231352,) | 추천 대상이면 0 이상, 아니면 -1 |
+| `signatures` | (231352, 128) uint32 | MinHash 시그니처 |
+| `num_perm`, `seed` | 스칼라 | 시그니처 길이와 seed |
+
+두 행의 시그니처에서 값이 일치하는 위치의 비율이 Jaccard의 추정값이다. 이 파일은 LSH 인덱스의 입력이고, 다른 작업에서 직접 쓸 일은 없다.
+
+## LSH 후보 (예정)
+
+재료 유사 레시피 검색 결과는 아직 없다. 구현이 끝나면 이 절에 파일 형식과 조회 함수를 추가한다. `recipe_id` 기준으로 제공한다.

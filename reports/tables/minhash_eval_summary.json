@@ -1,0 +1,9 @@
+{
+  "num_perm": 128,
+  "neighbor_pairs_within_2se": 0.9465,
+  "seeds": 20,
+  "bias_mean_over_seeds": -0.00058,
+  "bias_sd_across_seeds": 0.00737,
+  "bias_se_of_mean": 0.00165,
+  "rmse_mean_over_seeds": 0.04059
+}

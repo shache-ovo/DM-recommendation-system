@@ -1,0 +1,13 @@
+{
+  "recipes": 231352,
+  "vocabulary": 13731,
+  "plural_folds": 1175,
+  "aliases": 20,
+  "removed_high_frequency": [],
+  "empty_sets": 0,
+  "mean_set_size": 9.103,
+  "num_perm": 128,
+  "seed": 42,
+  "normalize_seconds": 1.91,
+  "signature_seconds": 1.83
+}

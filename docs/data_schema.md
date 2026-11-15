@@ -173,6 +173,37 @@ jaccard(ingredient_set[27208], ingredient_set[89204])   # 두 레시피의 재�
 
 두 행의 시그니처에서 값이 일치하는 위치의 비율이 Jaccard의 추정값이다. 이 파일은 LSH 인덱스의 입력이고, 다른 작업에서 직접 쓸 일은 없다.
 
-## LSH 후보 (예정)
+## 재료가 비슷한 레시피 (LSH)
 
-재료 유사 레시피 검색 결과는 아직 없다. 구현이 끝나면 이 절에 파일 형식과 조회 함수를 추가한다. `recipe_id` 기준으로 제공한다.
+`python3 scripts/build_lsh.py`가 `data/processed/lsh_neighbors.csv`를 만든다(약 20초). `build_minhash.py`를 먼저 실행해야 한다.
+방법과 조회 함수는 `docs/lsh.md`에 있다.
+
+### lsh_neighbors.csv
+
+추천 대상 레시피마다 재료가 비슷한 레시피를 최대 20개까지 담는다. 한 행이 (레시피, 이웃) 쌍 하나다.
+
+| 컬럼 | 형식 | 설명 |
+|---|---|---|
+| `recipe_id` | int | 기준 레시피 |
+| `recipe_idx` | int | 기준 레시피의 연속 번호 |
+| `neighbor_recipe_id` | int | 재료가 비슷한 레시피 |
+| `neighbor_recipe_idx` | int | 그 레시피의 연속 번호 |
+| `rank` | int | 기준 레시피 안에서의 순위 (1이 가장 비슷함) |
+| `est_jaccard` | float | MinHash로 추정한 재료 Jaccard (0~1) |
+
+- 기준과 이웃 모두 추천 대상 레시피(37,818개)다. `recipe_id`로 다른 파일과 바로 합칠 수 있다.
+- 이웃 수는 레시피마다 다르다. 20개를 다 채운 레시피가 68.6%이고, 이웃이 없어 이 파일에 나오지 않는 레시피가 1,853개다.
+- `est_jaccard`는 추정값이다. 정확한 값이 필요하면 `ingredient_sets.csv`의 집합으로 직접 계산한다.
+- LSH 설정(b, r)은 아직 잠정값이다. 확정하면 이 파일의 내용이 바뀐다.
+
+```python
+neighbors = pd.read_csv(P + "lsh_neighbors.csv")
+
+# 군집 라벨 붙이기 (cluster 는 recipe_id 를 인덱스로 하는 Series 라고 가정)
+neighbors["neighbor_cluster"] = neighbors["neighbor_recipe_id"].map(cluster)
+
+# 한 레시피의 유사 레시피
+neighbors[neighbors["recipe_id"] == 27208]
+```
+
+여러 레시피의 이웃을 합치거나 조건을 바꿔 조회하려면 `SimilarRecipes`를 쓴다(`docs/lsh.md` 3절).

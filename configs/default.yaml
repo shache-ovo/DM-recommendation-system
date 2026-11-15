@@ -65,9 +65,12 @@ ingredients:
 minhash:
   num_perm: 128             # 시그니처 길이. 6단계 실험으로 정한다
 
-# 아래 블록은 자리만 잡아 둔 값이다. 7~8단계에서 실험으로 확정한다.
 lsh:
-  bands: 32
-  rows: 4                   # bands * rows == minhash.num_perm
-  query_profile: all_train_positives   # 대안: recent_n
-  recent_n: null
+  # 시그니처를 rows 개씩 bands 개로 나눈다. bands * rows == minhash.num_perm
+  # 후보가 될 확률이 가파르게 오르는 유사도는 대략 (1/bands)^(1/rows) = 0.42 다.
+  bands: 32                 # 8단계 실험으로 확정한다
+  rows: 4                   # 8단계 실험으로 확정한다
+  index_scope: core         # core: 추천 대상 레시피만 인덱스에 넣는다. all: 전체 레시피
+  # lsh_neighbors.csv 에 레시피마다 저장할 이웃 수와 최소 추정 Jaccard
+  neighbors_top_n: 20
+  neighbors_min_jaccard: 0.0

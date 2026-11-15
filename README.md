@@ -113,7 +113,7 @@ python3 scripts/preprocess.py   # 약 30초. data/processed/ 에 산출물, repo
 MinHash와 LSH는 직접 구현한다.
 
 - MinHash: 재료 이름을 정규화해 집합을 만들고 길이 128의 시그니처로 Jaccard를 추정한다. 구현, 정규화 규칙, 추정 오차는 [docs/minhash.md](docs/minhash.md)에 있다.
-- LSH: 작성 예정
+- LSH: 시그니처를 band로 나눠 버킷에 넣고, 같은 버킷에 든 레시피만 후보로 비교한다. 구현과 조회 방법은 [docs/lsh.md](docs/lsh.md)에 있다.
 
 ## Experiment commands/configurations
 
@@ -124,9 +124,10 @@ python3 -m pytest                  # 단위 테스트
 bash scripts/download_data.sh      # 1. 원본 데이터 받기
 python3 scripts/preprocess.py      # 2. 전처리: data/processed/
 python3 scripts/build_minhash.py   # 3. 재료 집합과 MinHash 시그니처: data/processed/
+python3 scripts/build_lsh.py       # 4. LSH 인덱스와 유사 레시피 표: data/processed/lsh_neighbors.csv
 ```
 
-LSH 이후 단계의 실행 명령: 작성 예정
+이후 단계의 실행 명령: 작성 예정
 
 ## Evaluation
 

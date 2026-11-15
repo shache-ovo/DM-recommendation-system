@@ -30,6 +30,8 @@ def validate_config(config: dict[str, Any]) -> None:
         )
     if not 0 <= config["preprocess"]["positive_min_rating"] <= 5:
         raise ValueError("preprocess.positive_min_rating 은 0~5 여야 한다")
+    if config["lsh"]["index_scope"] not in ("core", "all"):
+        raise ValueError("lsh.index_scope 는 core 또는 all 이어야 한다")
     if config["preprocess"]["k_core"] < 1:
         raise ValueError("preprocess.k_core 는 1 이상이어야 한다")
 
